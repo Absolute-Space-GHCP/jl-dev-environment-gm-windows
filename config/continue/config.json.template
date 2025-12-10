@@ -1,8 +1,26 @@
 {
-  "_version": "1.0.0",
-  "_updated": "2025-12-08",
-  "_purpose": "Continue AI assistant configuration for Gemini models via Vertex AI",
+  "_version": "1.1.0",
+  "_updated": "2025-12-10",
+  "_purpose": "Continue AI assistant configuration for Claude and Gemini models",
   "models": [
+    {
+      "title": "Claude Opus 4.5",
+      "provider": "anthropic",
+      "model": "claude-opus-4-20250514",
+      "apiKey": "${ANTHROPIC_API_KEY}"
+    },
+    {
+      "title": "Claude Sonnet 4.5",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "apiKey": "${ANTHROPIC_API_KEY}"
+    },
+    {
+      "title": "Claude Haiku 4",
+      "provider": "anthropic",
+      "model": "claude-haiku-4-20250514",
+      "apiKey": "${ANTHROPIC_API_KEY}"
+    },
     {
       "title": "Gemini 3 Pro (Preview)",
       "provider": "vertex-ai",
