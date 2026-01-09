@@ -1,0 +1,34 @@
+# ============================================================================
+# GitHub Actions - Slack Notification Workflow
+# ============================================================================
+# Version:     1.0.0
+# Updated:     2025-12-08
+# Purpose:     Send notifications to Slack on push and PR events
+# Requires:    SLACK_WEBHOOK_URL secret in repository settings
+# ============================================================================
+
+name: Slack Notifications
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack on Push
+        if: github.event_name == 'push'
+        run: |
+          curl -s -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"Push to main\nRepo: \${{ github.repository }}\nBy: \${{ github.actor }}\nCommit: \${{ github.event.head_commit.message }}\"}" \
+            \${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on PR
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -s -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"Pull Request\nRepo: \${{ github.repository }}\nBy: \${{ github.actor }}\nTitle: \${{ github.event.pull_request.title }}\"}" \
+            \${{ secrets.SLACK_WEBHOOK_URL }}
